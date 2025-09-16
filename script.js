@@ -1,6 +1,9 @@
 async function loadGlossary() {
   try {
-    const response = await fetch('glossary.json');
+    // GitHub Pages path fix
+    const base = window.location.pathname.replace(/\/index\.html$/, '');
+    const response = await fetch(`${base}/glossary.json`);
+    if (!response.ok) throw new Error('Network response was not ok');
     const glossary = await response.json();
     displayGlossary(glossary);
   } catch (error) {
