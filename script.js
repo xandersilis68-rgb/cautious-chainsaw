@@ -1,30 +1,37 @@
-const glossaryList = document.getElementById('glossary-list');
-const searchInput = document.getElementById('search');
-
-let glossary = [];
-
-// Load glossary from JSON
-fetch('glossary.json')
-  .then(res => res.json())
-  .then(data => {
-    glossary = data;
+async function loadGlossary() {
+  try {
+    const response = await fetch('glossary.json');
+    const glossary = await response.json();
     displayGlossary(glossary);
-  });
+  } catch (error) {
+    console.error('Error loading glossary:', error);
+    document.getElementById('glossary-list').innerHTML = '<li>Failed to load glossary.</li>';
+  }
+}
 
-function displayGlossary(list) {
-  glossaryList.innerHTML = '';
-  list.forEach(item => {
+function displayGlossary(glossary) {
+  const list = document.getElementById('glossary-list');
+  list.innerHTML = '';
+  glossary.forEach(item => {
     const li = document.createElement('li');
-    li.innerHTML = `<strong>${item.term}</strong>: ${item.definition}`;
-    glossaryList.appendChild(li);
+    const term = document.createElement('h2');
+    term.textContent = item.term;
+    const definition = document.createElement('p');
+    definition.textContent = item.definition;
+    li.appendChild(term);
+    li.appendChild(definition);
+    list.appendChild(li);
   });
 }
 
-// Real-time search
-searchInput.addEventListener('input', () => {
-  const query = searchInput.value.toLowerCase();
-  const filtered = glossary.filter(item => 
-    item.term.toLowerCase().includes(query) || item.definition.toLowerCase().includes(query)
-  );
-  displayGlossary(filtered);
+document.getElementById('search').addEventListener('input', (e) => {
+  const filter = e.target.value.toLowerCase();
+  const items = document.querySelectorAll('#glossary-list li');
+  items.forEach(li => {
+    const term = li.querySelector('h2').textContent.toLowerCase();
+    const def = li.querySelector('p').textContent.toLowerCase();
+    li.style.display = term.includes(filter) || def.includes(filter) ? '' : 'none';
+  });
 });
+
+loadGlossary();
