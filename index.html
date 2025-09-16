@@ -1,136 +1,17 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Volleyball Toolkit</title>
-<link rel="stylesheet" href="styles.css" />
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Volleyball Glossary</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site-header">
-  <h1>Volleyball Toolkit</h1>
-  <nav>
-    <button data-section="home" class="nav-btn active">Home</button>
-    <button data-section="playbook" class="nav-btn">Playbook</button>
-    <button data-section="scoreboard" class="nav-btn">Scoreboard</button>
-    <button data-section="lineup" class="nav-btn">Lineup</button>
-    <button data-section="rules" class="nav-btn">Rules</button>
-    <button data-section="glossary" class="nav-btn">Glossary</button>
-  </nav>
-</header>
-
-<main class="container">
-  <section id="home" class="section active home-screen">
-    <h2>Welcome to the Volleyball Toolkit</h2>
-    <div class="tiles">
-      <div class="tile" data-section="playbook">📖 Interactive Playbook</div>
-      <div class="tile" data-section="scoreboard">📊 Digital Scoreboard</div>
-      <div class="tile" data-section="lineup">👥 Lineup Manager</div>
-      <div class="tile" data-section="rules">📚 Rule Explorer</div>
-      <div class="tile" data-section="glossary">🔤 Volleyball Glossary</div>
-    </div>
-  </section>
-
-  <section id="playbook" class="section">
-    <h2>Interactive Playbook</h2>
-    <div class="playbook-controls">
-      <input id="playName" placeholder="Play name (e.g. Quick 1)" />
-      <button id="savePlay">Save Play</button>
-      <button id="newFrame">Add Default Frame</button>
-      <button id="exportPlays">Export Plays (JSON)</button>
-      <select id="savedPlays"></select>
-      <button id="deletePlay">Delete Play</button>
-      <label class="small">Preset: <select id="presetPlays"><option value="">--none--</option><option value="quick1">Quick 1 (preset)</option><option value="outside">Outside Combo</option></select></label>
-    </div>
-    <div class="court-wrapper">
-      <svg id="court" viewBox="0 0 600 400" class="court" xmlns="http://www.w3.org/2000/svg">
-        <rect width="600" height="400" fill="#f4f7fb" stroke="#b8c6d9"/>
-        <line x1="300" y1="0" x2="300" y2="400" stroke="#d0d7e3" stroke-width="2"/>
-      </svg>
-      <div class="controls">
-        <div>
-          <label>Player name: <input id="playerName" value="P1" /></label>
-          <label>Number: <input id="playerNumber" value="1" style="width:60px"/></label>
-          <label>Role:
-            <select id="playerRole">
-              <option>Setter</option><option>OH</option><option>MB</option><option>Libero</option><option>Opp</option>
-            </select>
-          </label>
-        </div>
-        <p>Drag players onto the court. Double-click a player to edit (name, number, photo). Delete selected player with Del key.</p>
-        <input id="photoInput" type="file" accept="image/*" style="display:none"/>
-      </div>
-    </div>
-  </section>
-
-  <section id="scoreboard" class="section">
-    <h2>Digital Scoreboard</h2>
-    <div class="scoreboard" id="scoreboardArea" tabindex="0">
-      <div class="team half" id="homeHalf">
-        <div class="team-header"><div contenteditable="true" id="homeName" class="team-name">Home</div></div>
-        <div class="points" id="homePoints">0</div>
-        <div class="sets">Sets: <span id="homeSets">0</span></div>
-      </div>
-      <div class="team half" id="awayHalf">
-        <div class="team-header"><div contenteditable="true" id="awayName" class="team-name">Away</div></div>
-        <div class="points" id="awayPoints">0</div>
-        <div class="sets">Sets: <span id="awaySets">0</span></div>
-      </div>
-    </div>
-    <div class="sb-actions">
-      <button id="resetScore">Reset Score</button>
-      <button id="endSet">End Set (award set to leading)</button>
-      <label><input id="spectatorMode" type="checkbox" /> Spectator Mode (read-only)</label>
-    </div>
-    <p class="hint">Tip: Click/tap left half to add a point to Home, right half for Away. Edit team names directly.</p>
-  </section>
-
-  <section id="lineup" class="section">
-    <h2>Lineup Manager</h2>
-    <div class="lineup-controls">
-      <input id="playerInput" placeholder="Player name" />
-      <input id="playerNum" placeholder="No." style="width:60px"/>
-      <select id="positionSelect">
-        <option>Setter</option><option>Libero</option><option>OH</option><option>MB</option><option>Opp</option>
-      </select>
-      <button id="addPlayer">Add Player</button>
-      <button id="autoRotate">Generate Rotation</button>
-      <button id="exportRoster">Export Roster</button>
-      <label class="small">Preset roster: <select id="presetRoster"><option value="">--none--</option><option value="sample1">Sample Team A</option></select></label>
-    </div>
-    <div class="roster-and-rotation">
-      <div class="roster">
-        <h3>Roster</h3>
-        <ul id="rosterList"></ul>
-      </div>
-      <div class="rotation">
-        <h3>Rotation</h3>
-        <ol id="rotationList"></ol>
-      </div>
-    </div>
-  </section>
-
-  <section id="rules" class="section">
-    <h2>Rule Explorer</h2>
-    <input id="ruleSearch" placeholder="Search rules (e.g., libero, rotation, net)" />
-    <div id="rulesList" class="rules-list full-list"></div>
-  </section>
-
-  <section id="glossary" class="section">
-    <h2>Volleyball Glossary</h2>
-    <input id="glossSearch" placeholder="Search terms (e.g., pancake, kill, ace)" />
-    <div id="glossaryList" class="glossary-list full-list"></div>
-  </section>
-</main>
-
-<footer class="site-footer">
-  <small>Made for coaches and players • Local storage saves your work in-browser. Export JSON to backup.</small>
-</footer>
-
-<script src="app.js"></script>
+  <div class="container">
+    <h1>🏐 Volleyball Glossary</h1>
+    <input type="text" id="search" placeholder="Search terms...">
+    <ul id="glossary-list"></ul>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>
