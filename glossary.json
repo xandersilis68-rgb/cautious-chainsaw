@@ -356,5 +356,20 @@
   {"term": "Serve Targeting", "definition": "Directing serves to exploit weaknesses or open spaces in the opponent’s formation."},
   {"term": "Offensive Hitting", "definition": "Skill of executing attacks with precision, power, or deception to score points."},
   {"term": "Defensive Positioning", "definition": "Placement of players to maximize coverage and prevent points by the opponent."},
-  {"term": "Rotation Management", "definition": "Ensuring proper player rotation and alignment during side-outs and substitutions."}
+  {"term": "Rotation Management", "definition": "Ensuring proper player rotation and alignment during side-outs and substitutions."},
+  {"term": "Ball Carrying", "definition": "Illegal action where a player holds or throws the ball instead of hitting it cleanly."},
+  {"term": "Double Contact Fault", "definition": "A fault occurring when a player contacts the ball twice consecutively (except during a block)."},
+  {"term": "Foot Fault", "definition": "Violation when a player steps on or over the end line while serving or crosses the centerline during play."},
+  {"term": "Net Violation", "definition": "Touching or interfering with the net during play is considered a fault."},
+  {"term": "Rotation Fault", "definition": "Occurs when players are out of rotational order at the time of the serve."},
+  {"term": "Four Hits Fault", "definition": "A fault when a team hits the ball more than three times before sending it over the net."},
+  {"term": "Lift Fault", "definition": "Illegal contact where the ball is caught or lifted instead of being struck cleanly."},
+  {"term": "Over-the-net Fault", "definition": "Player crosses the net plane illegally while attacking or blocking, interfering with opponent’s play."},
+  {"term": "Back-row Attack Fault", "definition": "Back-row player attacks the ball above net height in front of the 3-meter line."},
+  {"term": "Libero Fault", "definition": "Occurs if the libero attacks above net height, serves illegally, or blocks while restricted."},
+  {"term": "Serving Fault", "definition": "Any error during service including foot fault, ball landing out of bounds, or net contact."},
+  {"term": "Illegal Screening", "definition": "Blocking or obstructing the opponent’s view of the server during service is a fault."},
+  {"term": "Illegal Substitution", "definition": "Fault when substitutions exceed limits or occur incorrectly."},
+  {"term": "Ball Out of Bounds", "definition": "Fault when the ball lands outside the court lines without touching an opponent."},
+  {"term": "Simultaneous Contact Fault", "definition": "When two teammates contact the ball simultaneously and it is deemed illegal (if mishandled)."}
 ]
